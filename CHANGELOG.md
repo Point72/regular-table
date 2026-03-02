@@ -1,8 +1,16 @@
 # Changelog
 
-## [v0.8.1](https://github.com/finos/regular-table/tree/HEAD)
+## [v0.8.2](https://github.com/finos/regular-table/tree/HEAD)
 
-[Full Changelog](https://github.com/finos/regular-table/compare/v0.8.0...HEAD)
+[Full Changelog](https://github.com/finos/regular-table/compare/v0.8.1...HEAD)
+
+**Implemented enhancements:**
+
+- Add geometry correction for CSS `zoom` and `scale` [\#257](https://github.com/finos/regular-table/pull/257) ([texodus](https://github.com/texodus))
+
+## [v0.8.1](https://github.com/finos/regular-table/tree/v0.8.1) (2026-02-04)
+
+[Full Changelog](https://github.com/finos/regular-table/compare/v0.8.0...v0.8.1)
 
 **Implemented enhancements:**
 

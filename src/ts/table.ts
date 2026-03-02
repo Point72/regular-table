@@ -382,6 +382,7 @@ export class RegularTableViewModel extends RegularTableViewModelBase {
         last_cells: CellTuple[],
         override_row_height?: number,
     ): void {
+        const zoom = this.table.currentCSSZoom ?? 1;
         const measurements: Array<{
             cell: HTMLElement;
             metadata: CellMetadata | undefined;
@@ -399,18 +400,20 @@ export class RegularTableViewModel extends RegularTableViewModelBase {
                 Math.max(
                     10,
                     Math.min(
-                        this._column_sizes.row_height ?? box.height,
-                        box.height,
+                        this._column_sizes.row_height ?? box.height / zoom,
+                        box.height / zoom,
                     ),
                 );
 
             if (metadata?.size_key !== undefined) {
-                this._column_sizes.indices[metadata.size_key] = box.width;
+                this._column_sizes.indices[metadata.size_key] =
+                    box.width / zoom;
                 if (
-                    box.width &&
+                    box.width / zoom &&
                     this._column_sizes.override[metadata.size_key] === undefined
                 ) {
-                    this._column_sizes.auto[metadata.size_key] = box.width;
+                    this._column_sizes.auto[metadata.size_key] =
+                        box.width / zoom;
                 }
             }
         }

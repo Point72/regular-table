@@ -449,18 +449,20 @@ export class RegularTableViewModel extends RegularTableViewModelBase {
                 // CSS :nth-child is 1-indexed
                 const columnIndex = row_headers_size_key + 1; // - Math.floor(viewport.start_col);
 
+                // Work backwards to handle colspan/rowspan missing elements in
+                // `row_headers`.
                 cssRules.push(
-                    `thead tr.rt-autosize th:nth-child(${columnIndex}),`,
-                    `tbody td.rt-cell-clip:nth-child(${columnIndex})`,
+                    `thead tr.rt-autosize th:nth-of-type(${columnIndex}),`,
+                    `tbody th.rt-cell-clip:nth-last-of-type(${row_headers_length - row_headers_size_key})`,
                     `{min-width:${override_width}px;max-width:${override_width}px;}`,
                 );
             } else if (auto_width !== undefined) {
                 // Auto width applies when no override
                 const columnIndex = row_headers_size_key + 1; // - Math.floor(viewport.start_col);
                 cssRules.push(
-                    `thead tr.rt-autosize th:nth-child(${columnIndex}),`,
-                    `tbody td.rt-cell-clip:nth-child(${columnIndex})`,
-                    `{min-width:${auto_width}px;max-width:none;}`,
+                    `thead tr.rt-autosize th:nth-of-type(${columnIndex}),`,
+                    `tbody th.rt-cell-clip:nth-last-of-type(${row_headers_length - row_headers_size_key})`,
+                    `{min-width:${auto_width}px;}`,
                 );
             }
         }
@@ -486,17 +488,17 @@ export class RegularTableViewModel extends RegularTableViewModelBase {
                 // CSS :nth-child is 1-indexed
                 const columnIndex = size_key + 1; //  Math.floor(viewport.start_col);
                 cssRules.push(
-                    `thead tr.rt-autosize th:nth-child(${columnIndex}),`,
-                    `tbody td.rt-cell-clip:nth-child(${columnIndex})`,
+                    `thead tr.rt-autosize th:nth-of-type(${columnIndex}),`,
+                    `tbody td.rt-cell-clip:nth-of-type(${columnIndex - row_headers_size_key})`,
                     `{min-width:${override_width}px;max-width:${override_width}px;}`,
                 );
             } else if (auto_width !== undefined) {
                 // Auto width applies when no override
                 const columnIndex = size_key + 1; // Math.floor(viewport.start_col);
                 cssRules.push(
-                    `thead tr.rt-autosize th:nth-child(${columnIndex}),`,
-                    `tbody td.rt-cell-clip:nth-child(${columnIndex})`,
-                    `{min-width:${auto_width}px;max-width:none;}`,
+                    `thead tr.rt-autosize th:nth-of-type(${columnIndex}),`,
+                    `tbody td.rt-cell-clip:nth-of-type(${columnIndex - row_headers_size_key})`,
+                    `{min-width:${auto_width}px;}`,
                 );
             }
         }
